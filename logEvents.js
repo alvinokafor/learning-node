@@ -24,7 +24,6 @@ async function logEvents(message = "something was logged") {
       log_item
     );
   } catch (err) {
-    //handle error
     console.log(err);
   }
 }
