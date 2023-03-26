@@ -9,6 +9,8 @@ class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 
+myEmitter.on("log", (msg, logName) => logEvents(msg, logName));
+
 const PORT = process.env.PORT || 3500;
 
 const CONTENT_TYPES = {
@@ -36,6 +38,7 @@ async function serveFile(filePath, contentType, response) {
   } catch (error) {
     console.log(error);
     response.statusCode = 500;
+    myEmitter.emit("log", `${error.name}: ${error.message}`, "error_log.txt");
     response.end(
       contentType === CONTENT_TYPES.json ? JSON.stringify(data) : data
     );
@@ -57,6 +60,8 @@ function getFilePath(contentType, reqURL) {
 
 const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
+
+  myEmitter.emit("log", `${req.url}\t${req.method}`, "request_log.txt");
 
   let extension = path.extname(req.url);
   let contentType;
@@ -98,9 +103,4 @@ const server = http.createServer((req, res) => {
     serveFile(path.join(__dirname, "views", "404.html"), "text.html", res);
   }
 });
-
 server.listen(PORT, () => console.log(`Server started at port ${PORT}`));
-
-// myEmitter.on("log", (msg) => logEvents(msg));
-
-// myEmitter.emit("log", "New Event Log");

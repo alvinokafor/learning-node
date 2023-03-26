@@ -1,8 +1,0 @@
-Mar 2023 Saturday, 9:26:32 PM	7b81bc2f-1f6c-4472-99fc-141f627d1fa5	New Event Log
-Mar 2023 Saturday, 9:27:24 PM	d5b3eaaa-df59-4eb8-a3e7-a02520f11300	New Event Log
-Mar 2023 Saturday, 9:35:46 PM	b6690771-2df0-4f95-a1c3-ce9453205403	New Event Log
-Mar 2023 Saturday, 9:36:04 PM	9fa85113-f872-48aa-a219-7cf527aa9f84	New Event Log
-Mar 2023 Sunday, 11:25:01 PM	41d8b5f4-ad5c-489f-8666-f97e15f2f148	/data/data.json	GET
-Mar 2023 Sunday, 11:25:13 PM	14082adb-ad6e-41d2-8627-c25f0c1d5318	/	GET
-Mar 2023 Sunday, 11:25:13 PM	6f467f5c-b312-4f5f-96a9-d5c382664e7b	/css/main.css	GET
-Mar 2023 Sunday, 11:25:13 PM	c14a0af6-e3ca-4f28-93d8-106b2fe1dc97	/images/alvin-profile.png	GET

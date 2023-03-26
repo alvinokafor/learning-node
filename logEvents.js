@@ -3,7 +3,7 @@ const fsPromises = require("fs").promises;
 const path = require("path");
 const crypto = require("crypto");
 
-async function logEvents(message = "something was logged") {
+async function logEvents(message, logName) {
   const date_time = new Intl.DateTimeFormat("en-us", {
     year: "numeric",
     month: "short",
@@ -20,7 +20,7 @@ async function logEvents(message = "something was logged") {
       await fsPromises.mkdir(path.join(__dirname, "logs"));
     }
     await fsPromises.appendFile(
-      path.join(__dirname, "logs", "event_log.txt"),
+      path.join(__dirname, "logs", logName),
       log_item
     );
   } catch (err) {
