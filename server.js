@@ -23,13 +23,22 @@ const CONTENT_TYPES = {
 
 async function serveFile(filePath, contentType, response) {
   try {
-    const data = await fsPromises.readFile(filePath, "utf-8");
-    response.writeHead(200, { "Content-Type": contentType });
+    const raw_data = await fsPromises.readFile(
+      filePath,
+      !contentType.includes("image") ? "utf8" : ""
+    );
+    const data =
+      contentType === CONTENT_TYPES.json ? JSON.parse(raw_data) : raw_data;
+    response.writeHead(filePath.includes("404.html") ? 404 : 200, {
+      "Content-Type": contentType,
+    });
     response.end(data);
   } catch (error) {
     console.log(error);
     response.statusCode = 500;
-    response.end();
+    response.end(
+      contentType === CONTENT_TYPES.json ? JSON.stringify(data) : data
+    );
   }
 }
 
@@ -37,8 +46,9 @@ function getFilePath(contentType, reqURL) {
   if (contentType === CONTENT_TYPES.html && reqURL === "/") {
     return path.join(__dirname, "views", "index.html");
   } else if (contentType === CONTENT_TYPES.html && reqURL.slice(-1) === "/") {
+    console.log(reqURL);
     return path.join(__dirname, "views", reqURL, "index.html");
-  } else if ((contentType = CONTENT_TYPES.html)) {
+  } else if (contentType === CONTENT_TYPES.html) {
     return path.join(__dirname, "views", reqURL);
   } else {
     return path.join(__dirname, reqURL);
